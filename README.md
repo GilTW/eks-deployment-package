@@ -48,7 +48,7 @@ This is the main configuration file for the entire package and it has 2 sections
 
     | Variable                      | Type   | Related Component   | Description                                                             |   
     | ----------------------------- | ------ | ------------------- | ----------------------------------------------------------------------- |
-    | `project`                     | String | Common              | Used from inputs                                                        |
+    | `project`                     | String | Common              | Used from locals                                                        |
     | `vpc_cidr`                    | String | Networking          | The CIDR to be used for the VPC network address space                   |
     | `number_of_azs`               | String | Networking          | The number of availability zones to span over when creating VPC subnets |
     | `cluster_name`                | String | EKS Cluster         | The name of the cluster to be used as a suffix to the project name      |
