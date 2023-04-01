@@ -52,9 +52,9 @@ inputs = {
     }
   }
 
-  # If you are not using the Networking component you must set the public and subnet ids with at least 2 subent ids in each.
+  # If you are not using the Networking component you must set the public and private subnet ids with at least 2 subent ids in each.
   # Make sure you provide subnets with at least 6 free ips but of course it is recommended to provide much larger subnets.
-  # Also make sure that the private subnets have access to a NAT if you intend to allow outbound from the node groups
+  # Also make sure that the private subnets have access to a NAT if you intend to allow outbound connections from the node groups' machines.
   # public_subnet_ids = []
   # private_subnet_ids = []
 
@@ -71,8 +71,8 @@ inputs = {
           policy_type = "CUSTOM_INLINE"
           custom_permissions = {
             effect    = "Allow"
-            actions   = ["s3:ListBucket", "s3:PutObject", "s3:GetObject"]
-            resources = ["*"]
+            actions   = ["s3:PutObject"]
+            resources = ["arn:aws:s3:::${local.project_name}-infra-tf"]
           }
         }
       ]
