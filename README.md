@@ -9,7 +9,7 @@ By creating and OIDC Provider for our EKS cluster we allow our Kubernetes Servic
 Inside the Pod's containers you can seamlessly use AWS SDK (Boto3, JS-AWS-SDK, etc..) for communicating with AWS Resources (S3, SQS, SNS, etc...).
 
 ## Pre-Requisities  
-* [AWS Account](https://aws.amazon.com/free/?trk=2d3e6bee-b4a1-42e0-8600-6f2bb4fcb10c&sc_channel=ps&ef_id=CjwKCAjwrJ-hBhB7EiwAuyBVXYb0-moEkVoJq8MrolFAGE9tD9Hags-ONRUULLB5Ht8Qsg4_UfIQehoCiLkQAvD_BwE:G:s&s_kwcid=AL!4422!3!645125273261!e!!g!!aws!19574556887!145779846712&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) & [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) with permission to create the relevant resources
+* Create [AWS Account](https://aws.amazon.com/free/?trk=2d3e6bee-b4a1-42e0-8600-6f2bb4fcb10c&sc_channel=ps&ef_id=CjwKCAjwrJ-hBhB7EiwAuyBVXYb0-moEkVoJq8MrolFAGE9tD9Hags-ONRUULLB5Ht8Qsg4_UfIQehoCiLkQAvD_BwE:G:s&s_kwcid=AL!4422!3!645125273261!e!!g!!aws!19574556887!145779846712&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) & [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) with permission to create the relevant resources
 * Install [Terraform](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform) (v1.1.2 or higher)
 * Install [Terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/) (v0.35 or higher)
 * Install [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (Recommended 2.11.7 or higher)
