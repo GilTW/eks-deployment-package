@@ -39,7 +39,7 @@ inputs = {
   cluster_name = "simple-eks"
   k8s_version  = "1.25"
   node_groups = {
-    "simple-ng" : {
+    simple-ng = {
       ami_type       = "AL2_x86_64" # AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM
       capacity_type  = "ON_DEMAND"  # ON_DEMAND, SPOT
       disk_size      = 20
@@ -63,7 +63,7 @@ inputs = {
 
   ### EKS Service Accounts Component ###
   eks_service_accounts = {
-    "service-x-sa" : {
+    service-x-sa = {
       k8s_namespace = "default"
       iam_policies = [
         {
