@@ -102,7 +102,7 @@ If everything works properly we can start deploying the package.
 In case you decide to deploy the EKS on an existing VPC you can skip the following step.  
   
 Open the env.hcl file and configure the vpc_cidr and number_of_azs to set the required network settings:
-```
+```HCL
 vpc_cidr      = "192.168.0.0/16"
 number_of_azs = 2
 ``` 
@@ -116,7 +116,7 @@ You will start seeing terraform planning and deploying your resources, wait unti
 
 #### Step 2 - EKS Cluster Component
 Open the env.hcl file and configure your eks cluster prefrences:
-```json
+```HCL
 cluster_name = "simple-eks"
 k8s_version  = "1.25"
 node_groups = {
@@ -136,14 +136,14 @@ node_groups = {
 
 The package is enabling public access to the EKS cluster by default for anyone running this package by extracting the public IP of the machine in which the package is running.  
 However, if you want to statically add certain CIDRs to be allowed public access and avoid overriding public access for team members, consider using the following configuration:
-```
+```HCL
 cluster_public_access_cidrs = []
 ```
 
 If you are not using the Networking component you must set the public and private subnet ids with at least 2 subent ids in each.  
 Make sure you provide subnets with at least 6 free ips but of course it is recommended to provide much larger subnets.  
 Also make sure that the private subnets have access to a NAT if you intend to allow outbound connections from the node groups' machines.
-```
+```HCL
 public_subnet_ids = []
 private_subnet_ids = []
 ```
@@ -172,7 +172,7 @@ Before we continue forward it is recommended to use the aws cli to generate a ku
 By now you should have an EKS cluster running and ready for deployments, but in order to access AWS Resources from your Pods you need to specify a Service Account and that has the required IAM Role's permissions.
 
 Open the env.hcl file and configure a new Service Account as fo:
-```json
+```HCL
 eks_service_accounts = {
 "service-x-sa" : {
         k8s_namespace = "default"
@@ -229,21 +229,21 @@ In order to test our package let's create a deployment that will use a Service A
 
 #### Step 1 - Service Account Setup (Terraform)
 1. Let's configure a Service Account in the env.hcl file as follows:
-    ```json
+    ```HCL
     eks_service_accounts = {
         "service-x-sa" : {
-        k8s_namespace = "default"
-        iam_policies = [
-            {
-            policy_name = "S3Permissions"
-            policy_type = "CUSTOM_INLINE"
-            custom_permissions = {
-                effect    = "Allow"
-                actions   = ["s3:PutObject"]
-                resources = ["arn:aws:s3:::SOME_AWS_BUCKET"]
-            }
-            }
-        ]
+            k8s_namespace = "default"
+            iam_policies = [
+                {
+                    policy_name = "S3Permissions"
+                    policy_type = "CUSTOM_INLINE"
+                    custom_permissions = {
+                        effect    = "Allow"
+                        actions   = ["s3:PutObject"]
+                        resources = ["arn:aws:s3:::SOME_AWS_BUCKET"]
+                    }
+                }
+            ]
         }
     }
     ```
@@ -284,7 +284,7 @@ In order to accomplish what we need let's do the followings:
     * Replace SOME_AWS_BUCKET with a bucket you would like write into
 
 2. Create a requirmenets.txt file:
-    ```
+    ```HCL
     boto3==1.26.74
     ```
 
