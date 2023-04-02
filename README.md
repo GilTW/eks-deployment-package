@@ -354,7 +354,7 @@ In order to accomplish what we need let's do the followings:
     > kubectl get pods
     NAME                      READY   STATUS    RESTARTS   AGE
     testapp-7b67fb9bd-2l82r   1/1     Running   0          1m
-    ``
+    ```
 4. Check your bucket to see that you have the eks_test_file.txt
 
 
