@@ -174,7 +174,7 @@ By now you should have an EKS cluster running and ready for deployments, but in 
 Open the env.hcl file and configure a new Service Account as fo:
 ```HCL
 eks_service_accounts = {
-"service-x-sa" : {
+    service-x-sa = {
         k8s_namespace = "default"
         iam_policies = [
             # Example 1
