@@ -77,7 +77,7 @@ This component is responsible for creating the EKS cluster and its node groups w
 
 ### EKS Service Accounts Component
 This component is resposnsible for creating Service Accounts and their corresponding IAM Roles.  
-Once deploying the components it will update EKS and AWS IAM Roles automatically and any Service Account will be ready to use by whoever requires it.
+Once deploying the component it will create Service Accounts in EKS and AWS IAM Roles automatically which can be used with k8s services and deployments.
 
 ## Usage
 **Note:** In order to use this package you must either deploy the Networking component or supply both private and public subnet ids in env.hcl
