@@ -231,7 +231,7 @@ In order to test our package let's create a deployment that will use a Service A
 1. Let's configure a Service Account in the env.hcl file as follows:
     ```HCL
     eks_service_accounts = {
-        "service-x-sa" : {
+        service-x-sa = {
             k8s_namespace = "default"
             iam_policies = [
                 {
