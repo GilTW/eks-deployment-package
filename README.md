@@ -14,7 +14,7 @@ Inside the Pod's containers you can seamlessly use AWS SDK (Boto3, JS-AWS-SDK, e
 * Install [Terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/) (v0.35 or higher)
 * Install [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (Recommended 2.11.7 or higher)
     * Configure your access keys and secret keys
-    ```
+    ```console
     > aws configure
     AWS Access Key ID: IAM_USER_ACCESS_KEY
     AWS Secret Access Key: IAM_USER_SECRET_KEY
@@ -84,7 +84,7 @@ Once deploying the components it will update EKS and AWS IAM Roles automatically
 
 ### Initial Setup
 Make sure that you have all the prerquesites installed by running the followings (Showing on windows):
-```
+```console
 > terraform --version
 Terraform v1.4.4
 on windows_amd64
@@ -108,7 +108,7 @@ number_of_azs = 2
 ``` 
 
 Once you are done, go to the Networking component folder and run the followings:
-```
+```console
 > terragrunt init
 > terragrunt apply -y
 ```
@@ -116,7 +116,7 @@ You will start seeing terraform planning and deploying your resources, wait unti
 
 #### Step 2 - EKS Cluster Component
 Open the env.hcl file and configure your eks cluster prefrences:
-```
+```json
 cluster_name = "simple-eks"
 k8s_version  = "1.25"
 node_groups = {
@@ -149,13 +149,13 @@ private_subnet_ids = []
 ```
 
 Once you are done, go to the EKS Cluster component folder and run the followings:
-```
+```console
 > terragrunt init
 > terragrunt apply -y
 ```
 
 You will start seeing terraform planning and deploying your resources, wait until its done and verify that your cluster is up and running:
-```
+```console
 > aws eks describe-cluster EKS_CLUSTER_NAME
 ```
 * Replace EKS_CLUSTER_NAME with the full cluster name as per the project and cluster_name variables
@@ -163,7 +163,7 @@ You will start seeing terraform planning and deploying your resources, wait unti
 If the `status` field in the response is set to `'Active'` then it means that our cluster is up and running (You can also check that in the AWS console).  
 
 Before we continue forward it is recommended to use the aws cli to generate a kubeconfig which will be used with kubectl to connect to the cluster:
-```
+```console
 > aws eks update-kubeconfig --name EKS_CLUSTER_NAME --kubeconfig SOME_LOCATION
 ``` 
 * If you didn't configure the region when running `aws config` or you want another region then you have to specify `--region DEFAULT_REGION_CODE (e.g: eu-central-1)`
@@ -172,7 +172,7 @@ Before we continue forward it is recommended to use the aws cli to generate a ku
 By now you should have an EKS cluster running and ready for deployments, but in order to access AWS Resources from your Pods you need to specify a Service Account and that has the required IAM Role's permissions.
 
 Open the env.hcl file and configure a new Service Account as fo:
-```
+```json
 eks_service_accounts = {
 "service-x-sa" : {
         k8s_namespace = "default"
@@ -212,12 +212,12 @@ eks_service_accounts = {
 You can add as many Service Accounts as you like, just make sure to give them a unique name if they reside in the same namespace.
 
 Once you are done, go to the EKS Cluster component folder and run the followings:
-```
+```console
 > terragrunt init
 > terragrunt apply -y
 ```
 You will start seeing terraform planning and deploying your resources, wait until its done and verify that your Service Accounts has been created:
-```
+```console
 > kubectl get sa
 NAME           SECRETS   AGE
 default        0         3h49m
@@ -229,7 +229,7 @@ In order to test our package let's create a deployment that will use a Service A
 
 #### Step 1 - Service Account Setup (Terraform)
 1. Let's configure a Service Account in the env.hcl file as follows:
-    ```
+    ```json
     eks_service_accounts = {
         "service-x-sa" : {
         k8s_namespace = "default"
@@ -250,7 +250,7 @@ In order to test our package let's create a deployment that will use a Service A
     * Replace SOME_AWS_BUCKET with a bucket you would like to write to
 
 2. Go to the the EKS Service Account folder and run the followings:
-    ```
+    ```console
     > terragrunt init
     > terragrunt apply -y
     ```
@@ -259,7 +259,7 @@ In order to test our package let's create a deployment that will use a Service A
 In this step we will create a custom code image and push it to AWS ECR to be used in the deployment.
 In order to accomplish what we need let's do the followings:
 1. Using python let's create a small script that will run in the deployment:
-    ```
+    ```Python
     import boto3
     from time import sleep
 
@@ -289,7 +289,7 @@ In order to accomplish what we need let's do the followings:
     ```
 
 3. Create a Docker file which will be used to build our image:
-    ```
+    ```Docker
     FROM python:3.9-slim-buster
     RUN apt-get -y update && apt-get -y upgrade
     COPY ./run.py run.py
@@ -319,7 +319,7 @@ In order to accomplish what we need let's do the followings:
 
 #### Step 3 - Create a demo deplyoment using the Service Account and our ECR image
 1. Create a deployment.yml file as follows:
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -342,11 +342,11 @@ In order to accomplish what we need let's do the followings:
     ```
     * Replace AWS_IMAGE_ARN with the ARN of the ECR repository you created in Step 2
 2. Apply the deployment via kubectl:
-    ```
+    ```console
     > kubectl apply -f deployment.yml
     ```
 3. Check that your Pod is running:
-    ```
+    ```console
     > kubectl get deploy
     NAME      READY   UP-TO-DATE   AVAILABLE   AGE
     testapp   1/1     1            1           1m
