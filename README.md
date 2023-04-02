@@ -5,7 +5,7 @@ Welcome to the EKS Deployment Terraform Package!
 Here you will find a Terraform package built to deploy an EKS cluster with an OIDC Provider configured to assume IAM roles in order to access AWS resources outside of the EKS Cluster scope.
 
 ## How It Works?
-By creating and OIDC Provider for our EKS cluster we allow our Kubernetes Service Accounts to exchange tokens (Assume Role) with AWS STS in order to receive temporary credentials which will be used by the Pods configured with the corresponding Service Account to access the required AWS Resources.  
+By creating an OIDC Provider for our EKS cluster we allow our Kubernetes Service Accounts to exchange tokens (Assume Role) with AWS STS in order to receive temporary credentials which will be used by the Pods configured with the corresponding Service Account to access the required AWS Resources.  
 Inside the Pod's containers you can seamlessly use AWS SDK (Boto3, JS-AWS-SDK, etc..) for communicating with AWS Resources (S3, SQS, SNS, etc...).
 
 ## Pre-Requisities  
