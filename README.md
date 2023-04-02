@@ -289,7 +289,7 @@ In order to accomplish what we need let's do the followings:
     ```
 
 3. Create a Docker file which will be used to build our image:
-    ```Docker
+    ```Dockerfile
     FROM python:3.9-slim-buster
     RUN apt-get -y update && apt-get -y upgrade
     COPY ./run.py run.py
