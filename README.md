@@ -141,7 +141,7 @@ cluster_public_access_cidrs = []
 ```
 
 If you are not using the Networking component you must set the public and private subnet ids with at least 2 subent ids in each.  
-Make sure you provide subnets with at least 6 free ips but of course it is recommended to provide much larger subnets.  
+Make sure you provide subnets with at least 6 ips to be used by the EKS cluster but of course it is recommended to provide much larger subnets (See [docs](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html) for more information).  
 Also make sure that the private subnets have access to a NAT if you intend to allow outbound connections from the node groups' machines.
 ```HCL
 public_subnet_ids = []
