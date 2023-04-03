@@ -21,6 +21,7 @@ Inside the Pod's containers you can seamlessly use AWS SDK (Boto3, JS-AWS-SDK, e
     Default region name: DEFAULT_REGION_CODE (e.g: eu-central-1)
     Default output format: OUTPUT_FORMAT (Can be left blank)
     ```
+* Install Kubectl (Version is dependent on Kubernets version, see [docs](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html))
 
 ## Project Structure
 ```
